@@ -1,108 +1,72 @@
-use('hospitalDB');
+use('szpitalDB');
 
-db.getCollection('patients').insertMany([
+db.getCollection('pacjenci').insertMany([
   { 
-    'name': 'Marta Zielińska', 
-    'age': 29, 
-    'height': 168.5, 
-    'is_insured': true, 
-    'conditions': ['nadciśnienie'], 
-    'contact_info': { 'phone': '123456789', 'email': 'marta.z@example.com' },
-    'registration_date': new Date('2024-05-01T10:30:00Z'),
-    'last_visit': new Date('2024-12-20T15:00:00Z') 
+    'imie': 'Marta Zielińska', 
+    'wiek': 29, 
+    'wzrost': 168.5, 
+    'ubezpieczony': true, 
+    'choroby': ['nadciśnienie'], 
+    'dane_kontaktowe': { 'telefon': '123456789', 'email': 'marta.z@example.com' },
+    'data_rejestracji': new Date('2024-05-01T10:30:00Z'),
+    'ostatnia_wizyta': new Date('2024-12-20T15:00:00Z') 
   },
   { 
-    'name': 'Jan Kowalski', 
-    'age': 45, 
-    'height': 175.3, 
-    'is_insured': false, 
-    'conditions': ['cukrzyca', 'astma'], 
-    'contact_info': { 'phone': '987654321', 'email': 'jan.k@example.com' },
-    'registration_date': new Date('2024-02-14T09:00:00Z'),
-    'last_visit': new Date('2024-11-10T11:00:00Z')
+    'imie': 'Jan Kowalski', 
+    'wiek': 45, 
+    'wzrost': 175.3, 
+    'ubezpieczony': false, 
+    'choroby': ['cukrzyca', 'astma'], 
+    'dane_kontaktowe': { 'telefon': '987654321', 'email': 'jan.k@example.com' },
+    'data_rejestracji': new Date('2024-02-14T09:00:00Z'),
+    'ostatnia_wizyta': new Date('2024-11-10T11:00:00Z')
   }
 ]);
 
-db.getCollection('doctors').insertMany([
+db.getCollection('lekarze').insertMany([
   { 
-    'name': 'Dr. Adam Kowalski', 
-    'experience_years': 15, 
-    'salary': 15000.00, 
-    'is_available': true, 
-    'specializations': ['Kardiologia'], 
-    'contact_info': { 'phone': '987654321', 'email': 'adam.k@example.com' },
-    'employment_date': new Date('2010-05-01T09:00:00Z'),
-    'last_shift': new Date('2024-12-15T08:00:00Z')
+    'imie': 'Dr. Adam Kowalski', 
+    'lata_doswiadczenia': 15, 
+    'pensja': 15000.00, 
+    'dostepny': true, 
+    'specjalizacje': ['Kardiologia'], 
+    'dane_kontaktowe': { 'telefon': '987654321', 'email': 'adam.k@example.com' },
+    'data_zatrudnienia': new Date('2010-05-01T09:00:00Z'),
+    'ostatnia_zmiana': new Date('2024-12-15T08:00:00Z')
   },
   { 
-    'name': 'Dr. Anna Nowak', 
-    'experience_years': 8, 
-    'salary': 12000.00, 
-    'is_available': true, 
-    'specializations': ['Neurologia'], 
-    'contact_info': { 'phone': '321654987', 'email': 'anna.n@example.com' },
-    'employment_date': new Date('2016-03-01T10:00:00Z'),
-    'last_shift': new Date('2024-12-17T08:30:00Z')
+    'imie': 'Dr. Anna Nowak', 
+    'lata_doswiadczenia': 8, 
+    'pensja': 12000.00, 
+    'dostepny': true, 
+    'specjalizacje': ['Neurologia'], 
+    'dane_kontaktowe': { 'telefon': '321654987', 'email': 'anna.n@example.com' },
+    'data_zatrudnienia': new Date('2016-03-01T10:00:00Z'),
+    'ostatnia_zmiana': new Date('2024-12-17T08:30:00Z')
   }
 ]);
 
-db.getCollection('appointments').insertMany([
+db.getCollection('wizyta').insertMany([
   { 
-    'patient_id': { $oid: "507f191e810c19729de860ea" },  
-    'doctor_id': { $oid: "507f191e810c19729de860eb" },  
-    'duration_minutes': 30, 
-    'cost': 200.00, 
-    'is_completed': false, 
-    'symptoms': ['ból w klatce piersiowej', 'duszności'],
-    'details': { 'diagnosis': 'Nadciśnienie tętnicze', 'prescription': 'Leki na nadciśnienie' },
-    'appointment_date': new Date('2024-12-15T14:30:00Z'),
-    'created_at': new Date('2024-12-10T09:00:00Z')
+    'id_pacjenta': { $oid: "507f191e810c19729de860ea" },  
+    'id_lekarza': { $oid: "507f191e810c19729de860eb" },  
+    'czas_trwania_minuty': 30, 
+    'koszt': 200.00, 
+    'czy_zakonczona': false, 
+    'objawy': ['ból w klatce piersiowej', 'duszności'],
+    'szczegoly': { 'diagnostyka': 'Nadciśnienie tętnicze', 'recepta': 'Leki na nadciśnienie' },
+    'data_wizyty': new Date('2024-12-15T14:30:00Z'),
+    'data_utworzenia': new Date('2024-12-10T09:00:00Z')
   },
   { 
-    'patient_id': { $oid: "507f191e810c19729de860ec" },  
-    'doctor_id': { $oid: "507f191e810c19729de860ed" },  
-    'duration_minutes': 45, 
-    'cost': 250.00, 
-    'is_completed': false, 
-    'symptoms': ['ból głowy', 'zawroty głowy'],
-    'details': { 'diagnosis': 'Migrena', 'prescription': 'Leki przeciwbólowe' },
-    'appointment_date': new Date('2024-12-18T11:00:00Z'),
-    'created_at': new Date('2024-12-10T10:00:00Z')
+    'id_pacjenta': { $oid: "507f191e810c19729de860ec" },  
+    'id_lekarza': { $oid: "507f191e810c19729de860ed" },  
+    'czas_trwania_minuty': 45, 
+    'koszt': 250.00, 
+    'czy_zakonczona': false, 
+    'objawy': ['ból głowy', 'zawroty głowy'],
+    'szczegoly': { 'diagnostyka': 'Migrena', 'recepta': 'Leki przeciwbólowe' },
+    'data_wizyty': new Date('2024-12-18T11:00:00Z'),
+    'data_utworzenia': new Date('2024-12-10T10:00:00Z')
   }
 ]);
-
-const patientsVisitedAfterJanuary1st = db.getCollection('patients').find({
-  'last_visit': { $gte: new Date('2024-01-01') }
-}).count();
-
-console.log(`${patientsVisitedAfterJanuary1st} patients visited after January 1st, 2024.`);
-
-db.getCollection('appointments').aggregate([
-  { 
-    $match: { 
-      appointment_date: { $gte: new Date('2024-01-01'), $lt: new Date('2025-01-01') } 
-    }
-  },
-  { 
-    $group: { 
-      _id: '$doctor_id', 
-      totalRevenue: { $sum: '$cost' } 
-    }
-  },
-  { 
-    $lookup: { 
-      from: 'doctors', 
-      localField: '_id', 
-      foreignField: '_id', 
-      as: 'doctorDetails' 
-    }
-  },
-  { 
-    $project: { 
-      'doctorName': { $arrayElemAt: ['$doctorDetails.name', 0] },
-      'totalRevenue': 1 
-    }
-  }
-]);
-
-
